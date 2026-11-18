@@ -1,0 +1,13 @@
+[project]
+name = "rpsluna-window-detector"
+version = "0.1.0"
+description = "High FPS window capture and MediaPipe hand gesture stream for rpsluna"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mss>=9.0.0",
+    "opencv-python>=4.8.0.76",
+    "mediapipe>=0.10.9",
+    "websockets>=12.0",
+    "pygetwindow>=0.0.9",
+]

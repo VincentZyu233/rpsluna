@@ -1,0 +1,9 @@
+# 将所有 Markdown 纳入 GitHub 语言统计 (关闭 documentation 过滤)
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+
+README.md linguist-detectable=true
+README.md linguist-documentation=false
+
+**/README.md linguist-detectable=true
+**/README.md linguist-documentation=false

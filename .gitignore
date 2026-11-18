@@ -1,0 +1,24 @@
+node_modules
+lib
+dist
+.venv
+*.log
+.DS_Store
+*.local.md
+*.LOCAL.md
+readme.local.md
+README.LOCAL.md
+
+# 临时素材与录屏视频
+temp/
+tmp/
+/temp/
+/tmp/
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.webm
+*.task
+*.onnx
+models/

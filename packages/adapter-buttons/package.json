@@ -1,0 +1,27 @@
+{
+  "name": "koishi-plugin-rpsluna-adapter-buttons",
+  "version": "1.0.0",
+  "description": "Button and keyboard fallback input adapter for rpsluna",
+  "main": "src/index.ts",
+  "typings": "src/index.ts",
+  "license": "AGPL-3.0",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.18.0",
+    "koishi-plugin-rpsluna-core": "^1.0.0"
+  },
+  "koishi": {
+    "description": {
+      "zh": "rpsluna 纯按键与兜底调试输入适配器",
+      "en": "Button and debugging input adapter for rpsluna"
+    },
+    "service": {
+      "required": [
+        "rpsluna"
+      ]
+    }
+  }
+}

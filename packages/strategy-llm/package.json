@@ -1,0 +1,30 @@
+{
+  "name": "koishi-plugin-rpsluna-strategy-llm",
+  "version": "1.0.0",
+  "description": "LLM based psychological mind-reader and commentator strategy for rpsluna",
+  "main": "src/index.ts",
+  "typings": "src/index.ts",
+  "license": "AGPL-3.0",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.18.0",
+    "koishi-plugin-rpsluna-core": "^1.0.0"
+  },
+  "dependencies": {
+    "undici": "^6.21.0"
+  },
+  "koishi": {
+    "description": {
+      "zh": "rpsluna 大模型心理战与读心术策略 (接入 NewAPI/OpenAI 兼容接口)",
+      "en": "LLM psychological mind-reader strategy for rpsluna"
+    },
+    "service": {
+      "required": [
+        "rpsluna"
+      ]
+    }
+  }
+}

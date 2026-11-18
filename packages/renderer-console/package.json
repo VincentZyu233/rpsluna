@@ -1,0 +1,38 @@
+{
+  "name": "koishi-plugin-rpsluna-renderer-console",
+  "version": "1.0.0",
+  "description": "Koishi Console integration, visual arena dashboard and live monitor for rpsluna",
+  "main": "src/index.ts",
+  "typings": "src/index.ts",
+  "license": "AGPL-3.0",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "peerDependencies": {
+    "@koishijs/plugin-console": "^5.30.0",
+    "koishi": "^4.18.0",
+    "koishi-plugin-rpsluna-core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@koishijs/client": "^5.30.0",
+    "vue": "^3.4.0"
+  },
+  "koishi": {
+    "description": {
+      "zh": "rpsluna 赛博博弈控制台全景监控看板（房间管理、AI策略大脑、视觉伴侣与天梯赛事大屏）",
+      "en": "Visual arena dashboard and live status monitor for rpsluna"
+    },
+    "service": {
+      "required": [
+        "rpsluna"
+      ],
+      "optional": [
+        "console"
+      ]
+    },
+    "public": [
+      "dist"
+    ]
+  }
+}
