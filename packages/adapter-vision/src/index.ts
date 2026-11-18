@@ -265,6 +265,7 @@ function renderKioskHtml(config: Config): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>🎯 RPSLUNA · 视觉商显体感互动大屏 (Port 9498)</title>
   <style>
+    @import "https://cdn.jsdelivr.net/npm/@free-fonts/lxgw-wenkai@1.0.1/lxgw-wenkai.css";
     :root {
       --bg: #090d16;
       --card-bg: rgba(22, 29, 47, 0.85);
@@ -278,10 +279,12 @@ function renderKioskHtml(config: Config): string {
       --text-muted: #94a3b8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    body, button, input, select {
+      font-family: 'LXGW WenKai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
+    }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
       overflow: hidden;
       width: 100vw;
       height: 100vh;
