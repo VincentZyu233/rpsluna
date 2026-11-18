@@ -1,23 +1,12 @@
-import { Context, Schema, h, Session } from 'koishi'
+import { Context, h, Session } from 'koishi'
 import { Choice, formatChoice, formatOutcome, RoundRecord } from 'koishi-plugin-rpsluna-core'
-import { usage } from './usage'
+import { Config } from './config'
+
+export * from './config'
+export * from './usage'
 
 export const name = 'rpsluna-adapter-satori-command'
-export { usage }
-
 export const inject = ['rpsluna']
-
-export interface Config {
-  commandName?: string
-  enableButtons?: boolean
-  enableAutoNextRound?: boolean
-}
-
-export const Config: Schema<Config> = Schema.object({
-  commandName: Schema.string().default('rps').description('聊天平台触发对决的主指令名称'),
-  enableButtons: Schema.boolean().default(true).description('是否在支持的聊天平台 (QQ/TG/Discord等) 下发 Satori 原生交互按钮'),
-  enableAutoNextRound: Schema.boolean().default(true).description('对局结算后是否在消息底部自动附带下一轮出拳按钮'),
-})
 
 export function apply(ctx: Context, config: Config) {
   // 1. 向核心状态机注册输入适配器驱动

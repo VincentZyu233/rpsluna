@@ -1,17 +1,11 @@
-import { Context, Schema } from 'koishi'
+import { Context } from 'koishi'
 import { Choice } from 'koishi-plugin-rpsluna-core'
-import { usage } from './usage'
+import { Config } from './config'
+
+export * from './config'
+export * from './usage'
 
 export const name = 'rpsluna-adapter-buttons'
-export { usage }
-
-export interface Config {
-  autoRegister?: boolean
-}
-
-export const Config: Schema<Config> = Schema.object({
-  autoRegister: Schema.boolean().default(true).description('是否自动向核心注册输入源。提示：按键出拳 UI 请打开独立的对决大屏 http://localhost:8498'),
-})
 
 export function apply(ctx: Context, config: Config) {
   ctx.inject(['rpsluna'], (ctx) => {

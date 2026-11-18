@@ -1,27 +1,17 @@
-import { Context, Schema } from 'koishi'
+import { Context } from 'koishi'
 import {} from '@koishijs/plugin-console'
 import { resolve } from 'path'
-import { usage } from './usage'
+import { Config } from './config'
+
+export * from './config'
+export * from './usage'
 
 export const name = 'rpsluna-renderer-console'
-export { usage }
 
 export const inject = {
   required: ['rpsluna'],
   optional: ['console'],
 }
-
-export interface Config {
-  broadcastEvents?: boolean
-  visionStreamUrl?: string
-  portalUrl?: string
-}
-
-export const Config: Schema<Config> = Schema.object({
-  broadcastEvents: Schema.boolean().default(true).description('是否向控制台 WebSocket 客户端实时广播对决事件'),
-  visionStreamUrl: Schema.string().default('http://127.0.0.1:9498').description('视觉体感大屏与推流网关地址 (Port 9498)'),
-  portalUrl: Schema.string().default('http://localhost:8498').description('对战大屏地址'),
-})
 
 export function apply(ctx: Context, config: Config) {
   // 必须严格监听 console 服务就绪，确保无论加载先后顺序，addEntry 一定生效！

@@ -1,27 +1,21 @@
-import { Context, Schema } from 'koishi'
+import { Context } from 'koishi'
 import { RpsLunaService } from './service'
 import { formatChoice, formatOutcome } from './judge'
 import { Choice } from './types'
+import { Config } from './config'
 
 export * from './types'
 export * from './judge'
 export * from './room'
 export * from './service'
 export * from './usage'
+export * from './config'
 
 export const name = 'rpsluna-core'
 
 export const inject = {
   optional: ['rpsluna'],
 }
-
-export interface Config {
-  defaultRoomName?: string
-}
-
-export const Config: Schema<Config> = Schema.object({
-  defaultRoomName: Schema.string().default('RPS 赛博博弈竞技场').description('默认对战房间名称'),
-})
 
 export function apply(ctx: Context, config: Config) {
   // 注入核心服务

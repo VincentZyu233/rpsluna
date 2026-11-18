@@ -1,19 +1,11 @@
-import { Context, Schema } from 'koishi'
+import { Context } from 'koishi'
 import { Choice, counterChoice, losingChoice, RoundRecord } from 'koishi-plugin-rpsluna-core'
-import { usage } from './usage'
+import { Config } from './config'
+
+export * from './config'
+export * from './usage'
 
 export const name = 'rpsluna-strategy-all'
-export { usage }
-
-export interface Config {
-  enableIocaine?: boolean
-  enableCheat?: boolean
-}
-
-export const Config: Schema<Config> = Schema.object({
-  enableIocaine: Schema.boolean().default(true).description('是否启用 Iocaine Powder 传奇博弈策略'),
-  enableCheat: Schema.boolean().default(true).description('是否启用 毫秒视觉偷看作弊彩蛋模式'),
-})
 
 export function apply(ctx: Context, config: Config) {
   ctx.inject(['rpsluna'], (ctx) => {
