@@ -1,25 +1,26 @@
 <template>
-  <k-layout main="darker" class="page-rooms">
-    <el-scrollbar>
-      <div class="rps-console-page">
-    <div class="page-header">
-      <div class="header-title">
-        <h2>🕹️ 对战大厅与房间调度</h2>
-        <span class="subtitle">实时监控 RPS 多模态博弈房间，动态干预出拳策略与对战节奏</span>
-      </div>
-      <div class="header-actions">
-        <el-button type="primary" size="small" @click="fetchRooms" :loading="loading">
-          🔄 刷新战况
-        </el-button>
-        <el-button type="success" size="small" @click="openPortal">
-          🌐 访问大屏 (8498)
-        </el-button>
-      </div>
-    </div>
+  <k-layout main="rps-rooms-layout">
+    <template #header>对战大厅与房间调度</template>
+    <el-scrollbar class="rps-scrollbar">
+      <main class="rps-rooms-page">
+        <header class="page-header">
+          <div class="header-title">
+            <h2>🕹️ 对战大厅与房间调度</h2>
+            <span class="subtitle">实时监控 RPS 多模态博弈房间，动态干预出拳策略与对战节奏</span>
+          </div>
+          <div class="header-actions">
+            <el-button type="primary" size="small" @click="fetchRooms" :loading="loading">
+              🔄 刷新战况
+            </el-button>
+            <el-button type="success" size="small" @click="openPortal">
+              🌐 访问大屏 (8498)
+            </el-button>
+          </div>
+        </header>
 
-    <!-- 房间列表 -->
-    <div class="room-grid" v-if="rooms.length > 0">
-      <div v-for="room in rooms" :key="room.id" class="k-card room-card">
+        <!-- 房间列表 -->
+        <div class="room-grid" v-if="rooms.length > 0">
+          <div v-for="room in rooms" :key="room.id" class="rps-card room-card">
         <div class="room-header">
           <div class="room-title-box">
             <span class="room-name">{{ room.name }}</span>
@@ -119,10 +120,10 @@
       </div>
     </div>
 
-    <div v-else class="empty-box k-card">
+    <div v-else class="rps-card empty-box">
       <span>正在连接 rpsluna 博弈服务，暂无活跃房间...</span>
     </div>
-  </div>
+      </main>
     </el-scrollbar>
   </k-layout>
 </template>
@@ -201,15 +202,27 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.page-rooms {
+.rps-scrollbar {
+  width: 100%;
   height: 100%;
 }
-.rps-console-page {
-  padding: 1.5rem 2rem;
+.rps-rooms-page {
   box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 24px clamp(18px, 3.5vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  color: var(--k-text-normal, #cbd5e1);
+  background: var(--k-main-bg);
+}
+.rps-card {
+  background: var(--k-card-bg, rgba(30, 41, 59, 0.7));
+  border: 1px solid var(--k-card-border, #334155);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .page-header {
   display: flex;

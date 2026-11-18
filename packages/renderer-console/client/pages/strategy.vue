@@ -1,63 +1,64 @@
 <template>
-  <k-layout main="darker" class="page-strategy">
-    <el-scrollbar>
-      <div class="rps-console-page">
-    <div class="page-header">
-      <div class="header-title">
-        <h2>🧠 AI 策略与心智大脑大盘</h2>
-        <span class="subtitle">全景透视 RPS 赛博博弈算法群：从马尔可夫转移矩阵到大语言模型心理战</span>
-      </div>
-    </div>
+  <k-layout main="rps-strategy-layout">
+    <template #header>AI 策略与心智大脑大盘</template>
+    <el-scrollbar class="rps-scrollbar">
+      <main class="rps-strategy-page">
+        <header class="page-header">
+          <div class="header-title">
+            <h2>🧠 AI 策略与心智大脑大盘</h2>
+            <span class="subtitle">全景透视 RPS 赛博博弈算法群：从马尔可夫转移矩阵到大语言模型心理战</span>
+          </div>
+        </header>
 
-    <!-- 策略家族卡片群 -->
-    <div class="strategy-list">
-      <div class="k-card strat-card" :class="{ active: currentTab === 'markov' }" @click="currentTab = 'markov'">
-        <div class="strat-header">
-          <span class="strat-icon">📈</span>
-          <div>
-            <div class="strat-name">Markov 转移矩阵</div>
-            <div class="strat-desc">二阶条件概率转移预测</div>
+        <!-- 策略家族卡片群 -->
+        <div class="strategy-list">
+          <div class="rps-card strat-card" :class="{ active: currentTab === 'markov' }" @click="currentTab = 'markov'">
+            <div class="strat-header">
+              <span class="strat-icon">📈</span>
+              <div>
+                <div class="strat-name">Markov 转移矩阵</div>
+                <div class="strat-desc">二阶条件概率转移预测</div>
+              </div>
+            </div>
+            <el-tag size="small" type="success">经典统计学</el-tag>
+          </div>
+
+          <div class="rps-card strat-card" :class="{ active: currentTab === 'iocaine' }" @click="currentTab = 'iocaine'">
+            <div class="strat-header">
+              <span class="strat-icon">🧪</span>
+              <div>
+                <div class="strat-name">Iocaine Powder 大师</div>
+                <div class="strat-desc">6大预测子博弈与置信度评估</div>
+              </div>
+            </div>
+            <el-tag size="small" type="primary">天梯博弈论</el-tag>
+          </div>
+
+          <div class="rps-card strat-card" :class="{ active: currentTab === 'llm' }" @click="currentTab = 'llm'">
+            <div class="strat-header">
+              <span class="strat-icon">🤖</span>
+              <div>
+                <div class="strat-name">LLM 心理战读心大师</div>
+                <div class="strat-desc">大模型思维链推理与嘲讽台词</div>
+              </div>
+            </div>
+            <el-tag size="small" type="warning">认知心理战</el-tag>
+          </div>
+
+          <div class="rps-card strat-card" :class="{ active: currentTab === 'cheat' }" @click="currentTab = 'cheat'">
+            <div class="strat-header">
+              <span class="strat-icon">⚡</span>
+              <div>
+                <div class="strat-name">瞬时读心外挂 (Visual)</div>
+                <div class="strat-desc">最后一帧手势提取与瞬杀克制</div>
+              </div>
+            </div>
+            <el-tag size="small" type="danger">降维外挂</el-tag>
           </div>
         </div>
-        <el-tag size="small" type="success">经典统计学</el-tag>
-      </div>
 
-      <div class="k-card strat-card" :class="{ active: currentTab === 'iocaine' }" @click="currentTab = 'iocaine'">
-        <div class="strat-header">
-          <span class="strat-icon">🧪</span>
-          <div>
-            <div class="strat-name">Iocaine Powder 大师</div>
-            <div class="strat-desc">6大预测子博弈与置信度评估</div>
-          </div>
-        </div>
-        <el-tag size="small" type="primary">天梯博弈论</el-tag>
-      </div>
-
-      <div class="k-card strat-card" :class="{ active: currentTab === 'llm' }" @click="currentTab = 'llm'">
-        <div class="strat-header">
-          <span class="strat-icon">🤖</span>
-          <div>
-            <div class="strat-name">LLM 心理战读心大师</div>
-            <div class="strat-desc">大模型思维链推理与嘲讽台词</div>
-          </div>
-        </div>
-        <el-tag size="small" type="warning">认知心理战</el-tag>
-      </div>
-
-      <div class="k-card strat-card" :class="{ active: currentTab === 'cheat' }" @click="currentTab = 'cheat'">
-        <div class="strat-header">
-          <span class="strat-icon">⚡</span>
-          <div>
-            <div class="strat-name">瞬时读心外挂 (Visual)</div>
-            <div class="strat-desc">最后一帧手势提取与瞬杀克制</div>
-          </div>
-        </div>
-        <el-tag size="small" type="danger">降维外挂</el-tag>
-      </div>
-    </div>
-
-    <!-- 详情展示区域 -->
-    <div class="detail-container k-card">
+        <!-- 详情展示区域 -->
+        <div class="rps-card detail-container">
       <!-- Markov 视图 -->
       <div v-if="currentTab === 'markov'" class="tab-content">
         <h3>📊 马尔可夫二阶转移概率热力网格</h3>
@@ -135,7 +136,7 @@
         />
       </div>
     </div>
-  </div>
+      </main>
     </el-scrollbar>
   </k-layout>
 </template>
@@ -156,15 +157,27 @@ const predictors = [
 </script>
 
 <style scoped>
-.page-strategy {
+.rps-scrollbar {
+  width: 100%;
   height: 100%;
 }
-.rps-console-page {
-  padding: 1.5rem 2rem;
+.rps-strategy-page {
   box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 24px clamp(18px, 3.5vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  color: var(--k-text-normal, #cbd5e1);
+  background: var(--k-main-bg);
+}
+.rps-card {
+  background: var(--k-card-bg, rgba(30, 41, 59, 0.7));
+  border: 1px solid var(--k-card-border, #334155);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .page-header {
   border-bottom: 1px solid var(--k-color-divider, rgba(255, 255, 255, 0.1));

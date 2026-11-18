@@ -1,9 +1,10 @@
 <template>
-  <k-layout main="darker" class="page-analytics">
-    <el-scrollbar>
-      <div class="rps-console-page">
+  <k-layout main="rps-analytics-layout">
+    <template #header>全域战绩天梯与大屏监控</template>
+    <el-scrollbar class="rps-scrollbar">
+      <main class="rps-analytics-page">
         <!-- 页面顶部横幅 -->
-        <div class="page-header">
+        <header class="page-header">
           <div class="header-title">
             <h2>📊 全域战绩天梯与大屏监控</h2>
             <span class="subtitle">人类 vs AI 胜负宏观统计、OBS 直播推流浏览器源与大屏赛事分发</span>
@@ -16,37 +17,37 @@
               🎥 复制 OBS 浏览器源
             </el-button>
           </div>
-        </div>
+        </header>
 
         <!-- 顶层关键指标 -->
         <div class="analytics-cards">
-          <div class="k-card metric-card">
-            <span class="metric-title">全域总博弈局数</span>
+          <div class="rps-card metric-card">
+            <span class="metric-title">🌐 全域总博弈局数</span>
             <span class="metric-big-num">128</span>
             <span class="metric-sub">覆盖 Web、Bot 与外设全通道</span>
           </div>
 
-          <div class="k-card metric-card">
-            <span class="metric-title">人类总体胜率</span>
+          <div class="rps-card metric-card">
+            <span class="metric-title">⚡ 人类总体胜率</span>
             <span class="metric-big-num text-win">24.2%</span>
             <span class="metric-sub">AI 压制率高达 75.8%</span>
           </div>
 
-          <div class="k-card metric-card">
-            <span class="metric-title">最高连胜英雄纪录</span>
+          <div class="rps-card metric-card">
+            <span class="metric-title">🔥 最高连胜英雄纪录</span>
             <span class="metric-big-num text-accent">5 连胜</span>
             <span class="metric-sub">玩家: @VincentZyu (打破AI预判)</span>
           </div>
 
-          <div class="k-card metric-card">
-            <span class="metric-title">最常出拳惯性</span>
+          <div class="rps-card metric-card">
+            <span class="metric-title">🎯 最常出拳惯性</span>
             <span class="metric-big-num">🪨 石头 (42%)</span>
             <span class="metric-sub">其次为布 (33%)、剪刀 (25%)</span>
           </div>
         </div>
 
         <!-- 大屏投屏与赛事分发 -->
-        <div class="portal-box k-card">
+        <div class="rps-card portal-box">
           <div class="portal-info">
             <h3>🌐 独立对战大屏与直播推流源 (Port 8498)</h3>
             <p class="desc">专为线下投影、展厅竞技以及 OBS 直播推流定制的独立全屏网页。</p>
@@ -74,7 +75,7 @@
         </div>
 
         <!-- 连胜英雄名人堂 -->
-        <div class="hall-of-fame k-card">
+        <div class="rps-card hall-of-fame">
           <h3>🏆 人类反抗军 · 连胜英雄名人堂</h3>
           <div class="hero-list">
             <div class="hero-item gold">
@@ -97,7 +98,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </el-scrollbar>
   </k-layout>
 </template>
@@ -120,16 +121,29 @@ const copyObsUrl = () => {
 </script>
 
 <style scoped>
-.page-analytics {
+.rps-scrollbar {
+  width: 100%;
   height: 100%;
 }
 
-.rps-console-page {
-  padding: 1.5rem 2rem;
+.rps-analytics-page {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 24px clamp(18px, 3.5vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  color: var(--k-text-normal, #cbd5e1);
+  background: var(--k-main-bg);
+}
+
+.rps-card {
+  background: var(--k-card-bg, rgba(30, 41, 59, 0.7));
+  border: 1px solid var(--k-card-border, #334155);
+  border-radius: 8px;
   box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .page-header {
@@ -167,8 +181,6 @@ const copyObsUrl = () => {
 
 .metric-card {
   padding: 1.25rem;
-  border-radius: 8px;
-  border: 1px solid var(--k-color-border, #334155);
   display: flex;
   flex-direction: column;
   gap: 0.4rem;

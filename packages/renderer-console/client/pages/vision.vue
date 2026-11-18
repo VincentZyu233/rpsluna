@@ -1,23 +1,24 @@
 <template>
-  <k-layout main="darker" class="page-vision">
-    <el-scrollbar>
-      <div class="rps-console-page">
-    <div class="page-header">
-      <div class="header-title">
-        <h2>👁️ 视觉手势识别与设备伴侣</h2>
-        <span class="subtitle">YOLO11 ONNX 视觉检测推流状态、FPS 推理仪表盘与全域输入设备矩阵</span>
-      </div>
-      <div class="header-actions">
-        <el-button size="small" type="primary" @click="checkVisionStatus" :loading="checking">
-          🔄 检查连接
-        </el-button>
-      </div>
-    </div>
+  <k-layout main="rps-vision-layout">
+    <template #header>视觉手势识别与设备伴侣</template>
+    <el-scrollbar class="rps-scrollbar">
+      <main class="rps-vision-page">
+        <header class="page-header">
+          <div class="header-title">
+            <h2>👁️ 视觉手势识别与设备伴侣</h2>
+            <span class="subtitle">YOLO11 ONNX 视觉检测推流状态、FPS 推理仪表盘与全域输入设备矩阵</span>
+          </div>
+          <div class="header-actions">
+            <el-button size="small" type="primary" @click="checkVisionStatus" :loading="checking">
+              🔄 检查连接
+            </el-button>
+          </div>
+        </header>
 
-    <!-- 视觉与硬件两大核心板块 -->
-    <div class="vision-layout">
-      <!-- 左侧：视觉推流窗口 -->
-      <div class="stream-panel k-card">
+        <!-- 视觉与硬件两大核心板块 -->
+        <div class="vision-layout">
+          <!-- 左侧：视觉推流窗口 -->
+          <div class="rps-card stream-panel">
         <div class="panel-header">
           <div class="header-left">
             <span class="panel-title">📸 实时手势推理视频流 (MJPEG)</span>
@@ -66,7 +67,7 @@
       <!-- 右侧：外设与输入通道矩阵 -->
       <div class="devices-panel">
         <!-- 矩阵卡片 -->
-        <div class="k-card dev-card">
+        <div class="rps-card dev-card">
           <h4>⌨️ 窗口与键盘输入通道 (adapter-window)</h4>
           <p class="card-desc">支持操作员或单机玩家在屏幕前使用数字按键瞬时出拳。</p>
           <div class="key-bindings">
@@ -76,7 +77,7 @@
           </div>
         </div>
 
-        <div class="k-card dev-card">
+        <div class="rps-card dev-card">
           <h4>🤖 Satori 跨平台富交互 (adapter-satori-command)</h4>
           <p class="card-desc">自动下发原生卡片按钮与交互回调，玩家免打字秒速出拳。</p>
           <div class="platform-tags">
@@ -86,7 +87,7 @@
           </div>
         </div>
 
-        <div class="k-card dev-card">
+        <div class="rps-card dev-card">
           <h4>🔌 物理硬件按键扩展 (adapter-buttons)</h4>
           <p class="card-desc">支持通过串口/USB 外设连接的物理街机三色手柄按键。</p>
           <div class="serial-status">
@@ -96,7 +97,7 @@
         </div>
       </div>
     </div>
-  </div>
+      </main>
     </el-scrollbar>
   </k-layout>
 </template>
@@ -135,15 +136,27 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.page-vision {
+.rps-scrollbar {
+  width: 100%;
   height: 100%;
 }
-.rps-console-page {
-  padding: 1.5rem 2rem;
+.rps-vision-page {
   box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  padding: 24px clamp(18px, 3.5vw, 40px);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.5rem;
+  color: var(--k-text-normal, #cbd5e1);
+  background: var(--k-main-bg);
+}
+.rps-card {
+  background: var(--k-card-bg, rgba(30, 41, 59, 0.7));
+  border: 1px solid var(--k-card-border, #334155);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .page-header {
   display: flex;
