@@ -1,7 +1,9 @@
 import { Context, Schema } from 'koishi'
 import { Choice, RoundRecord } from 'koishi-plugin-rpsluna-core'
+import { usage } from './usage'
 
 export const name = 'rpsluna-strategy-markov'
+export { usage }
 
 export interface Config {
   order: number

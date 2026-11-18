@@ -1,7 +1,9 @@
 import { Context, Schema } from 'koishi'
 import { Choice, counterChoice, losingChoice, RoundRecord } from 'koishi-plugin-rpsluna-core'
+import { usage } from './usage'
 
 export const name = 'rpsluna-strategy-all'
+export { usage }
 
 export interface Config {
   enableIocaine?: boolean

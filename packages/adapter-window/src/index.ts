@@ -1,7 +1,9 @@
 import { Context, Schema } from 'koishi'
 import * as Vision from 'koishi-plugin-rpsluna-adapter-vision'
+import { usage } from './usage'
 
 export const name = 'rpsluna-adapter-window'
+export { usage }
 
 export interface Config extends Vision.Config {}
 

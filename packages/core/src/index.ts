@@ -7,6 +7,7 @@ export * from './types'
 export * from './judge'
 export * from './room'
 export * from './service'
+export * from './usage'
 
 export const name = 'rpsluna-core'
 

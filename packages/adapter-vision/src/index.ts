@@ -2,8 +2,10 @@ import { Context, Schema } from 'koishi'
 import http from 'http'
 import { WebSocketServer, WebSocket } from 'ws'
 import { Choice } from 'koishi-plugin-rpsluna-core'
+import { usage } from './usage'
 
 export const name = 'rpsluna-adapter-vision'
+export { usage }
 
 export interface Config {
   port: number
@@ -14,40 +16,24 @@ export interface Config {
   kioskSkin: 'cyber' | 'atrium' | 'kids'
 }
 
-export const Config: Schema<Config> = Schema.intersect([
-  Schema.object({
-    port: Schema.union([Schema.natural(), Schema.transform(Schema.string(), Number)]).default(9498).description('视觉体感大屏与推流网关端口 (默认 9498)'),
-    host: Schema.string().default('0.0.0.0').description('监听的主机地址 (0.0.0.0 允许全域网访问)'),
-    defaultRoomId: Schema.string().default('default').description('默认交互对决房间 ID'),
-    defaultDifficulty: Schema.union([
-      Schema.const('adaptive').description('🧠 智能自适应大脑模式 (四阶段动态升降)'),
-      Schema.const('easy').description('🌱 轻松娱乐模式 (高概率放水)'),
-      Schema.const('normal').description('⚖️ 经典平衡模式 (真随机博弈)'),
-      Schema.const('hard').description('🔥 绝对读心模式 (全开压制)'),
-      Schema.const('cheat').description('⚡ 最后一帧降维外挂模式 (测试专用)'),
-    ]).default('adaptive').description('默认启动博弈对决算法模式'),
-    enableDifficultySelector: Schema.boolean().default(true).description('是否在外部交互大屏显示难度调整控件'),
-    kioskSkin: Schema.union([
-      Schema.const('cyber').description('高校与电竞·赛博霓虹机能风'),
-      Schema.const('atrium').description('商场快闪中庭·高明度极简明朗风'),
-      Schema.const('kids').description('低幼与展厅·超大字号童趣像素风'),
-    ]).default('cyber').description('大屏默认交互视觉皮肤'),
-  }).description('基础交互与端口设置'),
-
-  // 条件联动分支：命中 adaptive 模式时，展示强依赖前置硬告警
-  Schema.union([
-    Schema.object({
-      defaultDifficulty: Schema.const('adaptive'),
-    }).description(
-      '<span style="color: #ef4444; font-weight: bold;">⚠️ 强依赖前置说明：</span><br>' +
-      '智能自适应模式<b>强制要求</b>同时启用以下前置策略插件：<br>' +
-      '• <code>koishi-plugin-rpsluna-strategy-markov</code> (马尔可夫转移)<br>' +
-      '• <code>koishi-plugin-rpsluna-strategy-all</code> (Iocaine 算法群)<br>' +
-      '<i style="color: #dc2626;">根据 Fail-Fast 最高工程准则：若未检测到前置依赖，本插件将在启动时拒绝加载并抛错停机！</i>'
-    ),
-    Schema.object({}),
-  ]),
-])
+export const Config: Schema<Config> = Schema.object({
+  port: Schema.union([Schema.natural(), Schema.transform(Schema.string(), Number)]).default(9498).description('视觉体感大屏与推流网关端口 (默认 9498)'),
+  host: Schema.string().default('0.0.0.0').description('监听的主机地址 (0.0.0.0 允许全域网访问)'),
+  defaultRoomId: Schema.string().default('default').description('默认交互对决房间 ID'),
+  defaultDifficulty: Schema.union([
+    Schema.const('adaptive').description('🧠 智能自适应大脑模式 (需前置 markov 与 all 插件)'),
+    Schema.const('easy').description('🌱 轻松娱乐模式 (高概率放水)'),
+    Schema.const('normal').description('⚖️ 经典平衡模式 (真随机博弈)'),
+    Schema.const('hard').description('🔥 绝对读心模式 (全开压制)'),
+    Schema.const('cheat').description('⚡ 最后一帧降维外挂模式 (测试专用)'),
+  ]).default('adaptive').description('默认启动博弈对决算法模式'),
+  enableDifficultySelector: Schema.boolean().default(true).description('是否在外部交互大屏显示难度调整控件'),
+  kioskSkin: Schema.union([
+    Schema.const('cyber').description('高校与电竞·赛博霓虹机能风'),
+    Schema.const('atrium').description('商场快闪中庭·高明度极简明朗风'),
+    Schema.const('kids').description('低幼与展厅·超大字号童趣像素风'),
+  ]).default('cyber').description('大屏默认交互视觉皮肤'),
+}).description('基础交互与端口设置')
 
 export function apply(ctx: Context, config: Config) {
   ctx.inject(['rpsluna'], (ctx) => {

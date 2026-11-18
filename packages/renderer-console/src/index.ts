@@ -1,8 +1,10 @@
 import { Context, Schema } from 'koishi'
 import {} from '@koishijs/plugin-console'
 import { resolve } from 'path'
+import { usage } from './usage'
 
 export const name = 'rpsluna-renderer-console'
+export { usage }
 
 export const inject = {
   required: ['rpsluna'],

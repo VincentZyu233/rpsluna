@@ -1,8 +1,10 @@
 import { Context, Schema } from 'koishi'
 import http from 'http'
 import { Choice, formatChoice, formatOutcome } from 'koishi-plugin-rpsluna-core'
+import { usage } from './usage'
 
 export const name = 'rpsluna-renderer-portal'
+export { usage }
 
 export interface Config {
   port: number

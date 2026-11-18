@@ -1,7 +1,9 @@
 import { Context, Schema, h, Session } from 'koishi'
 import { Choice, formatChoice, formatOutcome, RoundRecord } from 'koishi-plugin-rpsluna-core'
+import { usage } from './usage'
 
 export const name = 'rpsluna-adapter-satori-command'
+export { usage }
 
 export const inject = ['rpsluna']
 

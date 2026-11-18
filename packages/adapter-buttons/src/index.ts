@@ -1,7 +1,9 @@
 import { Context, Schema } from 'koishi'
 import { Choice } from 'koishi-plugin-rpsluna-core'
+import { usage } from './usage'
 
 export const name = 'rpsluna-adapter-buttons'
+export { usage }
 
 export interface Config {
   autoRegister?: boolean

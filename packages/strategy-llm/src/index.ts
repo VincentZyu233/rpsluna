@@ -1,8 +1,10 @@
 import { Context, Schema } from 'koishi'
 import { Choice, RoundRecord } from 'koishi-plugin-rpsluna-core'
 import { request } from 'undici'
+import { usage } from './usage'
 
 export const name = 'rpsluna-strategy-llm'
+export { usage }
 
 export interface Config {
   endpoint: string
