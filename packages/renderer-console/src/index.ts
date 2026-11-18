@@ -17,7 +17,7 @@ export interface Config {
 
 export const Config: Schema<Config> = Schema.object({
   broadcastEvents: Schema.boolean().default(true).description('是否向控制台 WebSocket 客户端实时广播对决事件'),
-  visionStreamUrl: Schema.string().default('http://127.0.0.1:18082').description('YOLO11 视觉推流伴侣地址'),
+  visionStreamUrl: Schema.string().default('http://127.0.0.1:9498').description('视觉体感大屏与推流网关地址 (Port 9498)'),
   portalUrl: Schema.string().default('http://localhost:8498').description('对战大屏地址'),
 })
 
@@ -98,18 +98,33 @@ export function apply(ctx: Context, config: Config) {
       return { success: true, record, stats: room.getStats() }
     })
 
-    // 5. 获取视觉伴侣状态 (轻量 ping)
+    // 5. 获取视觉伴侣状态 (轻量 ping 与状态探测)
     consoleApi.addListener('rpsluna/get-vision-status', async () => {
       let isOnline = false
+      let isKioskOnline = false
+      const baseUrl = config.visionStreamUrl || 'http://127.0.0.1:9498'
       try {
-        const res = await fetch(config.visionStreamUrl!, { method: 'HEAD', signal: AbortSignal.timeout(1500) })
-        isOnline = res.ok || res.status === 200 || res.status === 404
+        const res = await fetch(`${baseUrl.replace(/\/+$/, '')}/api/vision/status`, { signal: AbortSignal.timeout(1500) })
+        if (res.ok) {
+          const data: any = await res.json()
+          isKioskOnline = true
+          isOnline = !!data.isOnline
+        } else {
+          isOnline = res.status === 200 || res.status === 404
+        }
       } catch {
-        isOnline = false
+        // 兜底尝试 HEAD
+        try {
+          const res = await fetch(baseUrl, { method: 'HEAD', signal: AbortSignal.timeout(1000) })
+          isOnline = res.ok || res.status === 200
+        } catch {
+          isOnline = false
+        }
       }
       return {
         isOnline,
-        streamUrl: config.visionStreamUrl,
+        isKioskOnline,
+        streamUrl: baseUrl,
       }
     })
   })

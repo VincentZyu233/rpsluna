@@ -181,13 +181,21 @@ async def main():
         if p_idx + 1 < len(sys.argv):
             proxy_url = sys.argv[p_idx + 1]
 
+    # 解析 --port 端口
+    vision_port = os.getenv("RPS_VISION_PORT", "9498")
+    if "--port" in sys.argv:
+        p_idx = sys.argv.index("--port")
+        if p_idx + 1 < len(sys.argv):
+            vision_port = sys.argv[p_idx + 1]
+
     args = [arg for arg in sys.argv[1:] if not arg.startswith("--") and not arg.startswith("-")]
-    # 如果 --proxy 后面跟了参数，排除它
-    if proxy_url and proxy_url in args:
-        args.remove(proxy_url)
+    # 排除已知选项后的参数
+    for opt in [proxy_url, vision_port]:
+        if opt and opt in args:
+            args.remove(opt)
 
     target_arg = args[0] if args else "iqoo"
-    ws_url = "ws://127.0.0.1:18082/gesture-stream"
+    ws_url = f"ws://127.0.0.1:{vision_port}/gesture-stream"
     show_preview = "--no-gui" not in sys.argv
 
     print(f"==================================================")

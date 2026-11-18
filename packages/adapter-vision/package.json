@@ -1,0 +1,33 @@
+{
+  "name": "koishi-plugin-rpsluna-adapter-vision",
+  "version": "1.0.0",
+  "description": "Vision kiosk dynamic interactive stage & YOLO gesture stream receiver for rpsluna",
+  "main": "src/index.ts",
+  "typings": "src/index.ts",
+  "license": "AGPL-3.0",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.18.0",
+    "koishi-plugin-rpsluna-core": "^1.0.0"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.12"
+  },
+  "koishi": {
+    "description": {
+      "zh": "rpsluna 视觉体感中心与 9498 商显大屏互动舞台 (支持 YOLO11 伴侣推流与自适应读心)",
+      "en": "Vision kiosk stage & YOLO gesture receiver for rpsluna"
+    },
+    "service": {
+      "required": [
+        "rpsluna"
+      ]
+    }
+  }
+}

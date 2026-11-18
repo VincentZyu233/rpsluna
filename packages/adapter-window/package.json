@@ -14,6 +14,7 @@
     "koishi-plugin-rpsluna-core": "^1.0.0"
   },
   "dependencies": {
+    "koishi-plugin-rpsluna-adapter-vision": "workspace:*",
     "ws": "^8.18.0"
   },
   "devDependencies": {

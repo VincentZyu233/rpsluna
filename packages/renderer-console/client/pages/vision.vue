@@ -39,8 +39,8 @@
           />
           <div v-else class="offline-placeholder">
             <span class="offline-icon">📡</span>
-            <span class="offline-title">视觉伴侣暂未连通</span>
-            <span class="offline-hint">请确保 window_detector 已启动，并在端口 18082 推流</span>
+            <span class="offline-title">视觉体感伴侣待机中</span>
+            <span class="offline-hint">视觉大屏服务运行于端口 9498，请启动 window_detector 或访问大屏开启 HUD 摄像头</span>
           </div>
         </div>
 
@@ -107,7 +107,7 @@ import { ref, onMounted } from 'vue'
 import { useContext } from '@koishijs/client'
 
 const ctx = useContext()
-const streamUrl = ref('http://127.0.0.1:18082')
+const streamUrl = ref('http://127.0.0.1:9498')
 const isOnline = ref(false)
 const checking = ref(false)
 
